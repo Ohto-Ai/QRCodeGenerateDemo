@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>614</width>
+    <height>434</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QLabel" name="typeLabel">
+      <property name="text">
+       <string>Type</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QComboBox" name="qrType"/>
+    </item>
+    <item row="0" column="2">
+     <widget class="QLabel" name="levelLabel">
+      <property name="text">
+       <string>Level</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="3">
+     <widget class="QComboBox" name="qrLevel"/>
+    </item>
+    <item row="0" column="4">
+     <widget class="QLabel" name="sizeLabel">
+      <property name="text">
+       <string>Size</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="5">
+     <widget class="QSlider" name="sizeSlider">
+      <property name="minimum">
+       <number>50</number>
+      </property>
+      <property name="maximum">
+       <number>4000</number>
+      </property>
+      <property name="singleStep">
+       <number>10</number>
+      </property>
+      <property name="value">
+       <number>200</number>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="6">
+     <widget class="QSpinBox" name="sizeSpin">
+      <property name="minimum">
+       <number>50</number>
+      </property>
+      <property name="maximum">
+       <number>4000</number>
+      </property>
+      <property name="singleStep">
+       <number>10</number>
+      </property>
+      <property name="value">
+       <number>200</number>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" rowspan="2" colspan="4">
+     <widget class="QPlainTextEdit" name="text">
+      <property name="placeholderText">
+       <string>Text here...</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="4">
+     <widget class="QLabel" name="borderLabel">
+      <property name="text">
+       <string>Border</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="5">
+     <widget class="QSlider" name="borderSlider">
+      <property name="minimum">
+       <number>-1</number>
+      </property>
+      <property name="maximum">
+       <number>10</number>
+      </property>
+      <property name="value">
+       <number>-1</number>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="6">
+     <widget class="QLabel" name="borderDisplay">
+      <property name="text">
+       <string>Default</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="4" colspan="3">
+     <widget class="QLabel" name="qrCode">
+      <property name="minimumSize">
+       <size>
+        <width>360</width>
+        <height>360</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>360</width>
+        <height>360</height>
+       </size>
+      </property>
+      <property name="contextMenuPolicy">
+       <enum>Qt::CustomContextMenu</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: 1px solid black</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources>
+  <include location="Resource.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>sizeSlider</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>sizeSpin</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>369</x>
+     <y>30</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>490</x>
+     <y>30</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sizeSpin</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>sizeSlider</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>490</x>
+     <y>30</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>369</x>
+     <y>30</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sizeSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>sizeSpin</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>369</x>
+     <y>30</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>490</x>
+     <y>30</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
