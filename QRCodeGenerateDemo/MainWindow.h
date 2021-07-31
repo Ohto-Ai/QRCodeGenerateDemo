@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <QMainWindow>
+#include <QTimer>
 #include "ui_MainWindow.h"
 #include "QREncoder.h"
 
@@ -12,9 +13,15 @@ public:
 
 	void updateQRCode();
 	void renderQRCode();
+protected:
+	void doUpdateQrCode();
+
+	void mousePressEvent(QMouseEvent* event) override;
 private:
 	QImage renderedImage;
 	QREncoder encoder;
 	Ui::MainWindow ui;
+
+	QTimer inputDelayTimer{ this };
 };
 

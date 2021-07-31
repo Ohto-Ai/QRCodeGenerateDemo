@@ -1,11 +1,17 @@
 ﻿#include "MainWindow.h"
 #include <QMenu>
 #include <QClipboard>
+#include <QDrag>
+#include <QMimeData>
 
 MainWindow::MainWindow(QWidget* parent)
 	: QMainWindow(parent)
 {
 	ui.setupUi(this);
+
+	inputDelayTimer.setInterval(300);
+	inputDelayTimer.setSingleShot(true);
+	connect(&inputDelayTimer, &QTimer::timeout, this, &MainWindow::doUpdateQrCode);
 		
 	ui.qrType->clear();
 	ui.qrType->addItem("QR Code", false);
@@ -53,6 +59,11 @@ MainWindow::MainWindow(QWidget* parent)
 
 void MainWindow::updateQRCode()
 {
+	inputDelayTimer.start();
+}
+
+void MainWindow::doUpdateQrCode()
+{
 	auto data = ui.text->toPlainText();
 	if (data.isEmpty())
 		data = ui.text->placeholderText();
@@ -72,6 +83,21 @@ void MainWindow::updateQRCode()
 	}
 	
 	renderQRCode();
+}
+
+void MainWindow::mousePressEvent(QMouseEvent* event)
+{
+	if (event->button() == Qt::LeftButton && childAt(event->pos()) == ui.qrCode)
+	{
+		auto drag = new QDrag(this);
+		auto data = new QMimeData;
+		auto img = ui.qrCode->pixmap().scaledToWidth(ui.qrCode->width() / 2);
+		drag->setHotSpot(QPoint(img.width() / 2, img.height() / 2));
+		drag->setPixmap(img);
+		data->setImageData(renderedImage);
+		drag->setMimeData(data);
+		drag->exec(Qt::CopyAction);
+	}
 }
 
 void MainWindow::renderQRCode()
