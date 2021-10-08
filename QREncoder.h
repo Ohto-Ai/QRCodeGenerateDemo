@@ -1,8 +1,8 @@
 ﻿#pragma once
 
-#include <QREncode.h>
-#include <QBitArray>
-#include <QPainter>
+#include <qrencode.h>
+#include <vector>
+#include <string>
 
 class QREncoder
 {
@@ -26,63 +26,41 @@ public:
         ModeFnc1second, ///< FNC1, second position
     };
 public:
-	
-    QImage toImage(int codeImageWidth = 400, int borderWidth = -1, QColor foreColor = Qt::black, QColor backgroundColor = Qt::white)
+    void print(std::string foreground = "█", std::string background = "  ")
     {
-        if (qrData.isEmpty())
-            return QImage();
-
-    	
-        double scale = (double)codeImageWidth / qrWidth;
-        if (borderWidth < 0)
-            borderWidth = scale * 2;
-        else
-            borderWidth *= scale;
-    	
-        QImage qrImage = QImage(codeImageWidth + borderWidth * 2, codeImageWidth + borderWidth * 2, QImage::Format_ARGB32);
-        QPainter painter(&qrImage);
-        painter.setBrush(backgroundColor);
-        painter.setPen(Qt::NoPen);
-        painter.drawRect(0, 0, qrImage.width(), qrImage.height());
-        painter.setBrush(foreColor);
-
         for (int i = 0; i < qrWidth; ++i)
         {
             for (int j = 0; j < qrWidth; ++j)
             {
-                if (qrData[i * qrWidth + j])
-                {
-                    painter.drawRect(QRectF(borderWidth + j * scale, borderWidth + i * scale, scale, scale));
-                }
+                printf("%s", qrData[i * qrWidth + j] ? foreground.c_str(): background.c_str());
             }
+            printf("\n");
         }
-
-        return qrImage;
     }
 
-    static QREncoder encode(QString string, ErrorCorrectionLevel ecLevel = LevelQ, bool useMicroQR = false
+    static QREncoder encode(std::string string, ErrorCorrectionLevel ecLevel = LevelQ, bool useMicroQR = false
         , int version = 0, EncodeMode hint = Mode8, bool caseSensitive = true)
     {
         QRcode* qrCode;
     	if(useMicroQR )
-            qrCode= QRcode_encodeStringMQR(string.toUtf8(), version
+            qrCode= QRcode_encodeStringMQR(string.c_str(), version
             , static_cast<QRecLevel>(ecLevel), static_cast<QRencodeMode>(hint), caseSensitive);
         else
-            qrCode = QRcode_encodeString(string.toUtf8(), version
+            qrCode = QRcode_encodeString(string.c_str(), version
                 , static_cast<QRecLevel>(ecLevel), static_cast<QRencodeMode>(hint), caseSensitive);
         if (qrCode == nullptr)
             return QREncoder();
         QREncoder code;
         code.qrWidth = qrCode->width;
         code.qrVersion = qrCode->version;
-        code.qrData = QBitArray(code.qrWidth * code.qrWidth);
+        code.qrData = std::vector<bool>(code.qrWidth * code.qrWidth, false);
 
         auto qrCodeWidth = qrCode->width > 0 ? qrCode->width : 1;
         for (int i = 0; i < qrCodeWidth; ++i)
         {
             for (int j = 0; j < qrCodeWidth; ++j)
             {
-                code.qrData.setBit(i * qrCodeWidth + j, qrCode->data[i * qrCodeWidth + j] & 1);
+                code.qrData[i * qrCodeWidth + j]= qrCode->data[i * qrCodeWidth + j] & 1;
             }
         }
 
@@ -91,7 +69,7 @@ public:
         return code;
     }
 
-    QBitArray data()const
+    std::vector<bool> data()const
     {
         return qrData;
     }
@@ -108,5 +86,5 @@ public:
 private:
     int qrWidth{ 0 };
     int qrVersion{ 0 };
-    QBitArray qrData{};
+    std::vector<bool> qrData{};
 };

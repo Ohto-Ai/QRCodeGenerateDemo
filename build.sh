@@ -1,0 +1,1 @@
+g++ source.cpp ~/lib/qrencode/src/*.c -o qrencoder -DHAVE_CONFIG_H
