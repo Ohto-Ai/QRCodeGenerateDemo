@@ -3,7 +3,9 @@
 #include <QClipboard>
 #include <QDrag>
 #include <QMimeData>
+#include <QDir>
 
+// todo 移除Micro QR Code
 MainWindow::MainWindow(QWidget* parent)
 	: QMainWindow(parent)
 {
@@ -11,7 +13,10 @@ MainWindow::MainWindow(QWidget* parent)
 
 	inputDelayTimer.setInterval(300);
 	inputDelayTimer.setSingleShot(true);
+	renderDelayTimer.setInterval(300);
+	renderDelayTimer.setSingleShot(true);
 	connect(&inputDelayTimer, &QTimer::timeout, this, &MainWindow::doUpdateQrCode);
+	connect(&renderDelayTimer, &QTimer::timeout, this, &MainWindow::renderQRCode);
 		
 	ui.qrType->clear();
 	ui.qrType->addItem("QR Code", false);
@@ -27,7 +32,10 @@ MainWindow::MainWindow(QWidget* parent)
 	connect(ui.qrLevel, &QComboBox::currentIndexChanged, this, &MainWindow::updateQRCode);
 	connect(ui.qrType, &QComboBox::currentIndexChanged, this, &MainWindow::updateQRCode);
 
-	connect(ui.sizeSpin, &QSpinBox::valueChanged, this, &MainWindow::renderQRCode);
+	connect(ui.sizeSpin, &QSpinBox::valueChanged, [=]
+	{
+			renderDelayTimer.start();
+	});
 	connect(ui.sizeSlider, &QSlider::rangeChanged, [=](int min, int max)
 		{
 			ui.sizeSpin->setMinimum(min);
@@ -43,15 +51,6 @@ MainWindow::MainWindow(QWidget* parent)
 				});
 
 			menu.exec(QCursor::pos());
-		});
-
-	connect(ui.borderSlider, &QSlider::valueChanged, [=]
-		{
-			if (ui.borderSlider->value() < 0)
-				ui.borderDisplay->setText("Default");
-			else
-				ui.borderDisplay->setText(QString("%1x").arg(ui.borderSlider->value()));
-			renderQRCode();
 		});
 	
 	updateQRCode();
@@ -81,8 +80,10 @@ void MainWindow::doUpdateQrCode()
 	{
 		ui.sizeSlider->setMinimum(50);
 	}
-	
+
 	renderQRCode();
+
+	renderedImage.save(tmpSavePath);
 }
 
 void MainWindow::mousePressEvent(QMouseEvent* event)
@@ -94,14 +95,24 @@ void MainWindow::mousePressEvent(QMouseEvent* event)
 		auto img = ui.qrCode->pixmap().scaledToWidth(ui.qrCode->width() / 2);
 		drag->setHotSpot(QPoint(img.width() / 2, img.height() / 2));
 		drag->setPixmap(img);
+
+		// file
+		data->setUrls({ QUrl::fromLocalFile(tmpSavePath) });
+		
+		// image
 		data->setImageData(renderedImage);
+
+		// text
+		data->setText(encoder.string());
+
 		drag->setMimeData(data);
+		
 		drag->exec(Qt::CopyAction);
 	}
 }
 
 void MainWindow::renderQRCode()
 {
-	renderedImage = encoder.toImage(ui.sizeSpin->value(), ui.borderSlider->value());
+	renderedImage = encoder.toImage(ui.sizeSpin->value() * encoder.width());
 	ui.qrCode->setPixmap(QPixmap::fromImage(renderedImage).scaled(ui.qrCode->width(), ui.qrCode->height(), Qt::KeepAspectRatio));
 }

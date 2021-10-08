@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include <QDir>
 #include <QMainWindow>
 #include <QTimer>
 #include "ui_MainWindow.h"
@@ -22,6 +23,9 @@ private:
 	QREncoder encoder;
 	Ui::MainWindow ui;
 
+	const QString tmpSavePath = QDir::tempPath() + "/qr_export.png";
+
 	QTimer inputDelayTimer{ this };
+	QTimer renderDelayTimer{ this };
 };
 

@@ -73,6 +73,7 @@ public:
         if (qrCode == nullptr)
             return QREncoder();
         QREncoder code;
+        code.qrString = string;
         code.qrWidth = qrCode->width;
         code.qrVersion = qrCode->version;
         code.qrData = QBitArray(code.qrWidth * code.qrWidth);
@@ -103,9 +104,13 @@ public:
     {
         return qrVersion;
     }
-
+    QString string() const
+    {
+        return qrString;
+    }
 
 private:
+    QString qrString{};
     int qrWidth{ 0 };
     int qrVersion{ 0 };
     QBitArray qrData{};
