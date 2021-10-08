@@ -5,16 +5,30 @@ VisualStudioVersion = 16.0.31229.75
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QRCodeGenerateDemo", "QRCodeGenerateDemo\QRCodeGenerateDemo.vcxproj", "{2400003A-05E7-4E0E-8846-9DA5FB36F6AF}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QRCoderConsole", "QRCoderConsole\QRCoderConsole.vcxproj", "{472A2042-0FFF-4931-BD0B-62395E7B8429}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
 		Release|x64 = Release|x64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{2400003A-05E7-4E0E-8846-9DA5FB36F6AF}.Debug|x64.ActiveCfg = Debug|x64
 		{2400003A-05E7-4E0E-8846-9DA5FB36F6AF}.Debug|x64.Build.0 = Debug|x64
+		{2400003A-05E7-4E0E-8846-9DA5FB36F6AF}.Debug|x86.ActiveCfg = Debug|x64
 		{2400003A-05E7-4E0E-8846-9DA5FB36F6AF}.Release|x64.ActiveCfg = Release|x64
 		{2400003A-05E7-4E0E-8846-9DA5FB36F6AF}.Release|x64.Build.0 = Release|x64
+		{2400003A-05E7-4E0E-8846-9DA5FB36F6AF}.Release|x86.ActiveCfg = Release|x64
+		{472A2042-0FFF-4931-BD0B-62395E7B8429}.Debug|x64.ActiveCfg = Debug|x64
+		{472A2042-0FFF-4931-BD0B-62395E7B8429}.Debug|x64.Build.0 = Debug|x64
+		{472A2042-0FFF-4931-BD0B-62395E7B8429}.Debug|x86.ActiveCfg = Debug|Win32
+		{472A2042-0FFF-4931-BD0B-62395E7B8429}.Debug|x86.Build.0 = Debug|Win32
+		{472A2042-0FFF-4931-BD0B-62395E7B8429}.Release|x64.ActiveCfg = Release|x64
+		{472A2042-0FFF-4931-BD0B-62395E7B8429}.Release|x64.Build.0 = Release|x64
+		{472A2042-0FFF-4931-BD0B-62395E7B8429}.Release|x86.ActiveCfg = Release|Win32
+		{472A2042-0FFF-4931-BD0B-62395E7B8429}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

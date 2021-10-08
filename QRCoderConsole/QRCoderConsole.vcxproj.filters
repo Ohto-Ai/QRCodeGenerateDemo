@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="3rd">
+      <UniqueIdentifier>{714aec7b-9318-41fd-a395-4d27568f8e77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd\qrencode">
+      <UniqueIdentifier>{c41ccd00-3b84-4543-a35c-79f7c861a8e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd\qrencode\src">
+      <UniqueIdentifier>{c6c083f0-f5e2-4a6c-a21c-2dfd512035f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd\qrencode\include">
+      <UniqueIdentifier>{36f87332-7bd0-47fe-b735-7542e947bec8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rd\qrencode\src\bitstream.c">
+      <Filter>3rd\qrencode\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rd\qrencode\src\mask.c">
+      <Filter>3rd\qrencode\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rd\qrencode\src\mmask.c">
+      <Filter>3rd\qrencode\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rd\qrencode\src\mqrspec.c">
+      <Filter>3rd\qrencode\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rd\qrencode\src\qrencode.c">
+      <Filter>3rd\qrencode\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rd\qrencode\src\qrinput.c">
+      <Filter>3rd\qrencode\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rd\qrencode\src\qrspec.c">
+      <Filter>3rd\qrencode\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rd\qrencode\src\rsecc.c">
+      <Filter>3rd\qrencode\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rd\qrencode\src\split.c">
+      <Filter>3rd\qrencode\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="build.sh" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="QREncoder.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\qrencode\include\bitstream.h">
+      <Filter>3rd\qrencode\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\qrencode\include\config.h">
+      <Filter>3rd\qrencode\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\qrencode\include\mask.h">
+      <Filter>3rd\qrencode\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\qrencode\include\mmask.h">
+      <Filter>3rd\qrencode\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\qrencode\include\mqrspec.h">
+      <Filter>3rd\qrencode\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\qrencode\include\qrencode.h">
+      <Filter>3rd\qrencode\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\qrencode\include\qrencode_inner.h">
+      <Filter>3rd\qrencode\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\qrencode\include\qrinput.h">
+      <Filter>3rd\qrencode\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\qrencode\include\qrspec.h">
+      <Filter>3rd\qrencode\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\qrencode\include\rsecc.h">
+      <Filter>3rd\qrencode\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\qrencode\include\split.h">
+      <Filter>3rd\qrencode\include</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
