@@ -26,7 +26,7 @@ public:
         ModeFnc1second, ///< FNC1, second position
     };
 public:
-    void print(std::string foreground = "█", std::string background = "  ")
+    void print(std::string foreground = "██", std::string background = "  ")
     {
         for (int i = 0; i < qrWidth; ++i)
         {
